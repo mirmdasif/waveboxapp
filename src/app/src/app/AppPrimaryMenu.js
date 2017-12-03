@@ -5,6 +5,7 @@ const Release = require('../shared/Release')
 const pkg = require('../package.json')
 const MenuTool = require('../shared/Electron/MenuTool')
 const electronLocalshortcut = require('electron-localshortcut')
+const Utils = require('./Utils')
 const {
   GITHUB_URL,
   BLOG_URL,
@@ -64,13 +65,13 @@ class AppPrimaryMenu {
         const focused = windowManager.focused()
         if (focused) { focused.openDevTools() }
       },
-      waveboxGithub: () => { shell.openExternal(GITHUB_URL) },
-      waveboxWebsite: () => { shell.openExternal(WEB_URL) },
-      waveboxBlog: () => { shell.openExternal(BLOG_URL) },
-      privacy: () => { shell.openExternal(PRIVACY_URL) },
-      eula: () => { shell.openExternal(EULA_URL) },
-      support: () => { shell.openExternal(SUPPORT_URL) },
-      knowledgeBase: () => { shell.openExternal(KB_URL) },
+      waveboxGithub: () => { Utils.openExternal(GITHUB_URL) },
+      waveboxWebsite: () => { Utils.openExternal(WEB_URL) },
+      waveboxBlog: () => { Utils.openExternal(BLOG_URL) },
+      privacy: () => { Utils.openExternal(PRIVACY_URL) },
+      eula: () => { Utils.openExternal(EULA_URL) },
+      support: () => { Utils.openExternal(SUPPORT_URL) },
+      knowledgeBase: () => { Utils.openExternal(KB_URL) },
       supportCenter: () => {
         windowManager.mailboxesWindow.show().focus().launchSupportCenter()
       },
@@ -119,7 +120,7 @@ class AppPrimaryMenu {
           buttons: [ 'Done', 'Website' ]
         }, (index) => {
           if (index === 1) {
-            shell.openExternal(WEB_URL)
+            Utils.openExternal(WEB_URL)
           }
         })
       },

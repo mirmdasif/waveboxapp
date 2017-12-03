@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Authentication Required</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        user-select: none;
+      }
+      body {
+        padding: 20px;
+        font-family: sans-serif;
+        color: rgb(98, 98, 98);
+      }
+      h1 {
+        font-size: 22px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        font-weight: normal;
+      }
+      h2 {
+        font-size: 16px;
+        font-weight: normal;
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 100%;
+        font-size: 14px;
+        padding: 3px 2px;
+      }
+      button {
+        border: 1px solid rgb(212, 212, 212);
+        background-color: white;
+        font-size: 14px;
+        padding: 5px 10px;
+        cursor: pointer;
+        color: rgb(83, 83, 83);
+      }
+      button:active {
+        background-color: rgb(245, 245, 245);
+        color: rgb(98, 98, 98);
+      }
+      button.primary {
+        font-weight: bold;
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+      .submit-group {
+        margin-top: 20px;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Authentication Required</h1>
+    <h2>
+      <strong id="requestor"></strong> requires a username and password
+    </h2>
+    <form>
+      <div class="form-group">
+        <label>User Name:</label>
+        <input type="text" name="username">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="password">
+      </div>
+      <div class="submit-group">
+        <button type="button" data-action="cancel">Cancel</button>
+        <button type="button" data-action="login" class="primary">Log In</button>
+      </div>
+    </form>
+    <script type="text/javascript">
+      const querystring = require('querystring')
+      const query = querystring.parse(window.location.search.substr(1))
+      if (query.port === 443) {
+        document.getElementById('requestor').textContent = `https://${query.realm}`
+      } else if (query.port === 80) {
+        document.getElementById('requestor').textContent = `http://${query.realm}`
+      } else {
+        document.getElementById('requestor').textContent = `${query.realm}:${query.port}`
+      }
+
+      document.querySelector('[data-action="cancel"]').addEventListener('click', (evt) => {
+        evt.preventDefault()
+        document.title = 'wbaction:cancel'
+      }, false)
+      document.querySelector('[data-action="login"]').addEventListener('click', (evt) => {
+        evt.preventDefault()
+        document.title = 'wbaction:login'
+      }, false)
+    </script>
+  </body>
+</html>

@@ -12,6 +12,7 @@ const mailboxStore = require('../../stores/mailboxStore')
 const CoreService = require('../../../shared/Models/Accounts/CoreService')
 const CoreMailbox = require('../../../shared/Models/Accounts/CoreMailbox')
 const ClassTools = require('../../ClassTools')
+const Utils = require('../../Utils')
 const CRExtensionUISubscriber = require('../../Extensions/Chrome/CRExtensionUISubscriber')
 const {
   AuthGoogle,
@@ -464,9 +465,10 @@ class MailboxesWindow extends WaveboxWindow {
   * @param mailbox=undefined: the mailbox to take the settings from if available
   */
   openWindowExternal (targetUrl, mailbox = undefined) {
-    shell.openExternal(targetUrl, {
-      activate: !settingStore.os.openLinksInBackground
-    })
+    // shell.openExternal(targetUrl, {
+    //   activate: !settingStore.os.openLinksInBackground
+    // })
+    Utils.openExternal(targetUrl)
   }
 
   /* ****************************************************************************/

@@ -154,6 +154,15 @@
     }
   })
 
+  ipcMain.on(ipcEvents.WB_BROWSER_OPEN_EXTERNAL, (evt, url) => {
+    openUrl(evt)
+  })
+
+  function openUrl () {
+    open(url, 'chromium-browser')
+  }
+
+
   /* ****************************************************************************/
   // App Events
   /* ****************************************************************************/
